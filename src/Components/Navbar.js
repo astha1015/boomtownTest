@@ -1,14 +1,15 @@
 import React from 'react'
 import '../Styles/Navbar.css'
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <div className='navbar'>
         <div className='links'>
-            <a href = '/'>Home</a>
-            <a href = '/repo'>Repositories</a>
-            <a href = '/events'>Events</a>
-            <a href = '/members'>Members</a>
+            <Link to = '/'>Home</Link>
+            <Link to = '/repo'>Repositories</Link>
+            <Link to = '/events'>Events</Link>
+            <Link to = '/members'>Members</Link>
         </div>
     </div>
   )

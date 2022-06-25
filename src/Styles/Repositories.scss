@@ -1,0 +1,14 @@
+@import '../Variables/Variables.scss';
+
+.repoList {  
+    .items {
+        flex: 1;
+        max-width: 400px; 
+        margin: 5px;
+    }
+    li{
+        text-decoration: none;
+        list-style: none;
+        font-size: $subHeading;
+}
+}

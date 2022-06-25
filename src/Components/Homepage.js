@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import '../Styles/Homepage.css'
+import { useGlobalState } from '../State'
+import { Card, Button, Badge } from 'react-bootstrap'
 
 const Homepage = () => {
-    const [data, setData] = useState([])
+    const [data, setData] = useGlobalState('data')
     useEffect(() => {
       fetch('https://api.github.com/orgs/boomtownroi')
       .then(res => res.json())
-      .then(d => setData(d))
+      .then(d => {
+        setData(d);})
       .catch(error => console.log(error))
     },[])
     return (
         <div>
-            <div className='home'>
-                <div>
-                    <h1>{`${data.id} - ${data.name}`}</h1>
-                </div>
-                <div className='companyDetails'>
-                    <a href = {data.url}>
-                        <img src={data.avatar_url} />
-                    </a>
-                    
-                    <div className='description'>
-                        <table>
-                            <tr>
-                                <th>CREATED:</th>
-                                <td>{data.created_at}</td>
-                            </tr>
-                            <tr>
-                                <th>UPDATED:</th>
-                                <td>{data.updated_at}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+            <div className='home'>       
+                <Card style={{ width: '500px'}}>
+                    <Card.Img variant="top" src={data.avatar_url} />
+                    <Card.Body>
+                        <Card.Title>
+                            {`${data.name} - ${data.id}`}
+                            <span style={{float:'right'}}><Badge bg={data?.is_verified ? 'success' : 'danger'}>{data?.is_verified ? 'Verified' : 'Not Verified'}</Badge></span>
+                        </Card.Title>
+                        <Card.Text>
+                            <p>
+                                <span className={new Date(data.created_at)> new Date(data.updated_at) ? 'recent' : ''}> {`Created: ${data.created_at}`} </span> <br />
+                                <span className={new Date(data.created_at)< new Date(data.updated_at) ? 'recent' : ''}> {`Updated: ${data.updated_at}`} </span>
+                            </p>
+                        </Card.Text>
+                        <Button variant="primary" href={data.html_url}>Learn More</Button>
+                    </Card.Body>
+                </Card>
             </div>        
         </div>  
     )

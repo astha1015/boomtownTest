@@ -1,0 +1,19 @@
+@import '../Variables/Variables.scss';
+.title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    font-family: $titleFont;
+}
+.subtitle {
+    font-size: $smallText;
+    margin-bottom: 10px;
+}
+.text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 500px;
+    font-family: $bodyFont;
+}

@@ -1,22 +1,10 @@
 @import '../Variables/Variables.scss';
 
-.home{ 
-    margin: 50px;
+.home{
+    display: flex;
     align-items: center;
-    h1{
-        color: $primaryBlack;
-        font-family: $titleFont;
-    }
-    .companyDetails{
-        display: flex;
-        img{
-            width: 300px;
-            height: 200px;
-        }
-        .description{
-            text-align: justify;
-            width: 400px;
-            margin-left: 30px;
-        }
+    justify-content: center;
+    .recent{
+        color: $active;
     }
 }
