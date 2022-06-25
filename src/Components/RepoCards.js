@@ -11,11 +11,12 @@ export const Cards = ({repo}) => {
       </Card.Header>
       <Card.Body>
         <Card.Title className='title'>
-            {repo.full_name}
+           {` ${repo?.full_name.replace('BoomTownROI/','') || 'Default Name'}  (${repo.id}) `}
         </Card.Title>
         <Card.Subtitle className='text-muted subtitle'>{`Last Updated on ${new Date(repo.updated_at).toLocaleDateString()}`}</Card.Subtitle>
         <Card.Text className='text'>
-          {repo?.description}
+          <br />
+          {repo?.description || 'Default Description'}
         </Card.Text>
         <Button variant="primary" href={repo.html_url}>Explore</Button>
       </Card.Body>

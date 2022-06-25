@@ -1,7 +1,5 @@
 .repoList .items {
-  flex: 1;
-  max-width: 400px;
-  margin: 5px;
+  margin: 15px;
 }
 .repoList li {
   text-decoration: none;

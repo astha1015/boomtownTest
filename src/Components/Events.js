@@ -1,42 +1,40 @@
 import React, { useState, useEffect } from 'react'
 import { useGlobalState } from '../State'
-import { Table } from 'react-bootstrap'
+import ApiError from './ApiError'
+import EventTable from './EventTable'
+import NotFound from './NotFound'
 
 const Events = () => {
     const eventsUrl = useGlobalState('data')[0].events_url
     const [events, setEvents] = useState([])
+    const [error, setError] = useState(null)
+    const [statusCode, setStatusCode] = useState()
 
     useEffect(() => {
         fetch(eventsUrl)
-        .then(res => res.json())
-        .then(res => setEvents(res))
-        .catch(error => console.log(error))
-    },[])
+        .then(res => {
+          if (!res.ok) {
+              setStatusCode(res.status)
+              setError(res.statusText)
+              throw (res)
+          }
+          return res.json()})
+      .then(res => {
+          setEvents(res)
+      })
+      .catch(error => {
+        console.log(`Response errored with status: ${error.status}`)
+      })
+  },[])
+  if (statusCode == 404) return <NotFound />
   return (
     <div>
+      {!error &&
+      <> 
         <h1>Events</h1>
-        <Table striped bordered hover size="sm">
-        <thead>
-            <tr>
-            <th>#</th>
-            <th>Event</th>
-            <th>Repository</th>
-            <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        {events.map(event => {
-            return(
-                <tr>
-                <td>{event?.id}</td>
-                <td>{event?.type.replace('Event', '')}</td>
-                <td><a href={event?.repo?.url}>{event?.repo?.name}</a></td>
-                <td>{event?.created_at}</td>
-              </tr>
-            )
-        })}
-        </tbody>
-        </Table>
+        <EventTable events = {events} />
+      </> 
+      } {error && <ApiError />}
     </div>
   )
 }

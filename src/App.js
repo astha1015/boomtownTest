@@ -6,6 +6,9 @@ import Events from "./Components/Events";
 import Members from "./Components/Members";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import NotFound from "./Components/NotFound";
+import Hooks from "./Components/Hooks";
+import Issues from "./Components/Issues";
 
 function App() {
   return (
@@ -18,6 +21,10 @@ function App() {
             <Route path='/repo' element={<Repositories />} />
             <Route path='/events' element={<Events />} />
             <Route path='/members' element={<Members />} />
+            <Route path='/hooks' element={<Hooks />} />
+            <Route path='/issues' element={<Issues />} />
+            <Route path='/404' element={<NotFound />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
       </div>

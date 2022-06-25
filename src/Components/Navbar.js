@@ -10,6 +10,8 @@ function Navbar() {
             <Link to = '/repo'>Repositories</Link>
             <Link to = '/events'>Events</Link>
             <Link to = '/members'>Members</Link>
+            <Link to = '/hooks'>Hooks</Link>
+            <Link to = '/issues'>Issues</Link>
         </div>
     </div>
   )

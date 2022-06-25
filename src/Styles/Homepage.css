@@ -1,8 +1,11 @@
 .home {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
 }
 .home .recent {
   color: rgb(72, 224, 82);
+}
+.home .details {
+  font-size: 25px;
+  font-family: "Courier New", Courier, monospace;
 }/*# sourceMappingURL=Homepage.css.map */

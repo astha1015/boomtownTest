@@ -2,9 +2,12 @@
 
 .home{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
     .recent{
         color: $active;
+    }
+    .details{
+        font-size: $heading;
+        font-family: $bodyFont;
     }
 }
