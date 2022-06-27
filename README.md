@@ -1,5 +1,5 @@
 # Introduction
-This project was created using Create React App (create-react-app) library. 
+This project was created using Express server for backend and Create React App (create-react-app) library for frontend. 
 
 ## Run
 To run this project in your device, simply clone the project using either https or ssh. Then run `npm install` to download all the dependencies in your root folder (node_modules will be created and install all requirements). Inside the client folder, run `npm run build` so that it creates a build folder which can be referenced through the backend server. Once done, run `npm start` - this will run the project in https://localhost:8080. 
