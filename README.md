@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Introduction
+This project was created using Create React App (create-react-app) library. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Run
+To run this project in your device, simply clone the project using either https or ssh. Then run `npm install` to download all the dependencies in your root folder (node_modules will be created and install all requirements). Inside the client folder, run `npm run build` so that it creates a build folder which can be referenced through the backend server. Once done, run `npm start` - this will run the project in https://localhost:8080. 
 
-## Available Scripts
+# Process
+## Server Side
+1. The start process will fetch the server.js from root and will execute the production build that is generated inside the client folder.
+2. Routes.js maps the generic endpoint to corresponding controller function
+3. Controller.js fetches the name of the organization and the specific endpoint (optional) from the request body and fetches the endpoint using axios. The response is then send to the calling request function. 
+4. middleware.js is for setting some headers on the response object 
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Client Side
+1. The start process will run index.js in the root of the folder structure
+2. It will then load the App component from App.js, it is the base of our application
+3. App.js in return call two main components of our application - the navbar and the page display
+    i. Navbar has all the navigation details. React-router-dom library is used to route through different pages in the application
+    ii. The display section dependes on the routes chosen and will render different components as per the selected Links
+4. The different display components are: Homepage, Repositories, Events, Members, Hooks and Issues
+    i. Homepage: Pulls and displays organizational information from the provided base url api endpoint
+    ii. Repositories: Fetches the endpoint for `${baseUrl}\repos` from the initial response and pulls and displays information related to all the git repositories for this organization, if exists
+    iii. Events: Fetches the endpoint for `${baseUrl}\events` from the initial response and pulls and displays information related to all the git events for this organization, if exists
+    iv. Members: Fetches the endpoint for `${baseUrl}\members` from the initial response and pulls and displays information related to all the git members for this origanization, if exists
+    v. Hooks: Fetches the endpoint for `${baseUrl}\hooks` from the initial response and pulls and displays information related to all the git hooks for this organization, if exists
+    vi. Issues: Fetches the endpoint for `${baseUrl}\issues` from the initial response and pulls and displays information related to all the git issues for this organization, if exists
+5. The API calls are handled in a separate folder called ApiHandler where there's a script - useApiData - that exports custom hooks created for extracting the API info through http requests. This is done for separating the application from the API, so that if in future we want to change/update the API it should affect the basic app functionality and the changes can only be made on this folder/files.
+6. For error and exception handling, there is a try-catch block that catches and logs if there are any error/unexpected responses. The application will display response if status is 200, redirect to 404 page if the page is not found and load ApiError component for any other error response from the server. We will be expecting a 500 incase our server encounters problem fetching from the original api. The Api Error page will have some details related to response statusText as well as the statusCode which can help us to identify the issue if something went wrong. The error will also be logging on the terminal where the project is running.
+7. Sass is used for styling and are compiled as css. I have used react-bootstrap library for simplicity and responsive design. 
