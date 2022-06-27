@@ -1,10 +1,10 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Container } from 'react-bootstrap'
 
 const EventTable = ({events}) => {
   return (
-    <div>
-        <Table responsive='sm' striped bordered hover>
+    <Container>
+        <Table responsive striped bordered style={{whiteSpace: 'nowrap', overflow:'scroll'}}>
         <thead>
             <tr>
             <th>#</th>
@@ -26,7 +26,7 @@ const EventTable = ({events}) => {
         })}
         </tbody>
         </Table>
-    </div>
+    </Container>
   )
 }
 
